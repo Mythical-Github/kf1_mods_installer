@@ -1,0 +1,19 @@
+{
+  "game_dir": "C:/Program Files (x86)/Steam/steamapps/common/KillingFloor",
+  "mods_dir": "Interpose/Mods",
+  "dir_names_to_file_types": {
+    "Animations": [".ukx"],
+    "KarmaData": [".ka"],
+    "Maps": [".rom"],
+    "Movies": [".bik"],
+    "Music": [".ogg"],
+    "Other": [".bat", ".bmp", ".jpg", ".rar", ".txt", ".zip"],
+    "Sounds": [".uax"],
+    "StaticMeshes": [".usx"],
+    "System": [".ini", ".u", ".uc", ".upl", ".int", ".rus", ".ucl", ".est"],
+    "Textures": [".utx"]
+  },
+  "workshop_collection_urls": [
+	"https://steamcommunity.com/sharedfiles/filedetails/?id=2246271339"
+  ]
+}
