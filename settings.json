@@ -1,6 +1,6 @@
 {
-  "game_dir": "C:/Program Files (x86)/Steam/steamapps/common/KillingFloor",
-  "mods_dir": "Interpose/Mods",
+  "game_dir": "D:/SteamLibrary/steamapps/common/KillingFloor",
+  "mods_dir": "Mods",
   "dir_names_to_file_types": {
     "Animations": [".ukx"],
     "KarmaData": [".ka"],
@@ -15,5 +15,9 @@
   },
   "workshop_collection_urls": [
 	"https://steamcommunity.com/sharedfiles/filedetails/?id=2246271339"
-  ]
+  ],
+  "login_info": {
+    "user": "user",
+    "password": "password"
+  }
 }
