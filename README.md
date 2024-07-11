@@ -1,8 +1,8 @@
 # kf1_mods_installer
 
 # What does this do?
-It easily installs killing floor 1 workshop mods in mass amounts via workshop collections./
-This was mainly created because the kf1 workshop breaks after you subscribe to more than 50 items/
+It easily installs killing floor 1 workshop mods in mass amounts via workshop collections.\
+This was mainly created because the kf1 workshop breaks after you subscribe to more than 50 items.\
 It also installs all mods in the game directory, in their own Mods folder, keeping the game install cleaner
 
 # Using:
@@ -13,5 +13,6 @@ It also installs all mods in the game directory, in their own Mods folder, keepi
 
 
 # Credits:
-credits to Mateos81 for creating it, and it is licensed here https://github.com/Mateos81/KFTempArchiveExtractor/blob/master/LICENSE \
-for their extractor, the one used here is just the same thing without prompts to allow easier automation
+KFTempArchiveExtractor by Mateos81 (the one used here is just the same thing without prompts to allow easier automation)\
+Licensed here:\
+https://github.com/Mateos81/KFTempArchiveExtractor/blob/master/LICENSE
