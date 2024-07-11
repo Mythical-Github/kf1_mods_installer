@@ -33,22 +33,22 @@ steamcmd_url = 'https://steamcdn-a.akamaihd.net/client/installer/steamcmd.zip'
 
 def find_bin_files(root_path):
     bin_files = []
-    for foldername, filenames in os.walk(root_path):
+    for foldername, _, filenames in os.walk(root_path):
         for filename in filenames:
             if filename.endswith('.bin'):
                 bin_files.append(os.path.join(foldername, filename))
     return bin_files
 
 
-def find_files_in_directory(directory, file_types):
+def find_files_in_directory(directory, files_to_search):
     found_files = []
-    for root, files in os.walk(directory):
+    for root, dirs, files in os.walk(directory):
         for file in files:
-            for extensions in file_types.items():
-                if file.lower().endswith(tuple(extensions)):
+            for dir_name, file_types in files_to_search.items():
+                if file.endswith(tuple(file_types)):
                     found_files.append(os.path.join(root, file))
-                    break
     return found_files
+
 
 
 def move_files_to_directories(files, settings):
@@ -160,11 +160,17 @@ def get_subscription_ids():
 
 
 def get_current_commands():
+    with open(settings_path, 'r') as settings_file:
+        settings = json.load(settings_file)
+
+    user = settings['login_info']['user']
+    password = settings['login_info']['password']
+
     initial_commands = [
             steam_cmd_exe,
             "+login",
-            "user",
-            "pass"
+            user,
+            password
         ]
     
     middle_commands = [
@@ -237,7 +243,7 @@ def main():
     download_mod_archives()
     unpack_mod_archives()  
     move_mod_files()
-    
+
 
 if __name__ == "__main__":
     main()
