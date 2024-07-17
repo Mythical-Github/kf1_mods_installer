@@ -13,6 +13,6 @@ It also installs all mods in the game directory, in their own Mods folder, keepi
 
 
 # Credits:
-KFTempArchiveExtractor by Mateos81 (the one used here is just the same thing without prompts to allow easier automation)\
+KFTempArchiveExtractor by Mateos81, edited by Mythical (the one used here is just the same thing without prompts to allow easier automation)\
 Licensed here:\
-https://github.com/Mateos81/KFTempArchiveExtractor/blob/master/LICENSE
+https://github.com/KillingFloorSeriesModding/KFTempArchiveExtractor
