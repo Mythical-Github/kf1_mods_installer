@@ -8,7 +8,7 @@ It also installs all mods in the game directory, in their own Mods folder, keepi
 # Using:
 1) run game atleast once
 2) set information in settings.json
-3) run exe
+3) run bat
 4) run game
 
 
