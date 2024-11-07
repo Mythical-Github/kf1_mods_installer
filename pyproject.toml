@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "kf1_mods_installer"
 dynamic = ["version"]
-description = "Easy To Use Command Line Modding Utility For Unreal Engine Games 4.0-5.5"
+description = "kf1 mod installer to fix various issues with the steam workshop"
 readme = "README.md"
 requires-python = ">=3.9"
 license = { file = "LICENSE" }
