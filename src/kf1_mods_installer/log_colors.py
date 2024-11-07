@@ -23,5 +23,5 @@ COLORS = {
     },
     "default_color": "\u001b[94m",
     "background_color": "\u001b[48;2;40;42;54m",
-    "log_name_prefix": "py_project_dev_tools_"
+    "log_name_prefix": "kf1_mod_installer_"
 }
