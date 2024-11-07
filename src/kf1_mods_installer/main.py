@@ -1,11 +1,13 @@
 import os
 import re
 import sys
-import pyjson5 as json
 import shutil
-import requests
 import subprocess
+import configparser
+import pyjson5 as json
 from zipfile import ZipFile
+
+import requests
 from bs4 import BeautifulSoup
 
 
@@ -94,7 +96,6 @@ def download_and_unzip_steamcmd():
 
 
 def update_ini_file():
-
     with open(settings_path, 'r') as settings_file:
         settings = json.load(settings_file)
 
@@ -111,24 +112,35 @@ def update_ini_file():
 
     ini_full_path = os.path.join(game_dir, ini_path)
 
-    with open(ini_full_path, 'r') as ini_file:
+    with open(ini_full_path, 'r', encoding='utf-8') as ini_file:
         ini_content = ini_file.readlines()
 
     section_found = False
+    paths_added = set()
+
     for i, line in enumerate(ini_content):
-        if '[Core.System]' in line:
+        if line.strip() == '[Core.System]':
             section_found = True
+            for j in range(i + 1, len(ini_content)):
+                if ini_content[j].startswith('[') and ini_content[j].strip() != '[Core.System]':
+                    break
+                if ini_content[j].startswith('Paths='):
+                    paths_added.add(ini_content[j].strip())
+
             for path_config in paths_config:
-                if path_config not in ini_content:
+                if path_config not in paths_added:
                     ini_content.insert(i + 1, path_config + '\n')
+                    paths_added.add(path_config)
+            break
 
     if not section_found:
         ini_content.append('\n[Core.System]\n')
         for path_config in paths_config:
             ini_content.append(path_config + '\n')
 
-    with open(ini_full_path, 'w') as ini_file:
+    with open(ini_full_path, 'w', encoding='utf-8') as ini_file:
         ini_file.writelines(ini_content)
+
 
 
 def get_subscription_ids():
