@@ -230,7 +230,7 @@ def unpack_mod_archives():
     if bin_files_list:
         print("List of bin files:")
         for bin_file in bin_files_list:
-            os.system(f"{archive_extractor_exe} {bin_file}")
+            subprocess.run([archive_extractor_exe, bin_file], check=True)
     else:
         print(f"No bin files found in the specified path: {file_path}")
 
