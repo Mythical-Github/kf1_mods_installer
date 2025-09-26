@@ -1,3 +1,13 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
 
-/steamcmd
-/src/kf1_mods_installer/steamcmd
+# Virtual environments
+.venv
+assets/base/kf1_mods_installer.exe
+/assets/base/logs
+/assets/base/steamcmd

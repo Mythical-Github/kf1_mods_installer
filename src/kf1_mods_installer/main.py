@@ -21,7 +21,7 @@ settings_path = f'{script_dir}/settings.json'
 
 
 with open(settings_path, 'r') as file:
-    settings = json.load(file)
+    settings = json.load(file, encoding='utf-8')
 
 
 archive_extractor_exe = f'{script_dir}/KFTempArchiveExtractor.exe'
@@ -94,9 +94,8 @@ def download_and_unzip_steamcmd():
     print('SteamCMD downloaded and unzipped successfully.')
     os.chdir(steam_cmd_dir)
 
-
 def update_ini_file():
-    with open(settings_path, 'r') as settings_file:
+    with open(settings_path, 'r', encoding='utf-8') as settings_file:
         settings = json.load(settings_file)
 
     game_dir = settings['game_dir']
@@ -112,25 +111,28 @@ def update_ini_file():
 
     ini_full_path = os.path.join(game_dir, ini_path)
 
-    with open(ini_full_path, 'r', encoding='utf-8') as ini_file:
+    with open(ini_full_path, 'r', encoding='latin-1') as ini_file:
         ini_content = ini_file.readlines()
 
     section_found = False
     paths_added = set()
 
     for i, line in enumerate(ini_content):
-        if line.strip() == '[Core.System]':
-            section_found = True
-            for j in range(i + 1, len(ini_content)):
-                if ini_content[j].startswith('[') and ini_content[j].strip() != '[Core.System]':
-                    break
-                if ini_content[j].startswith('Paths='):
-                    paths_added.add(ini_content[j].strip())
+        clean_line = re.sub(r'[\x00-\x1f\x7f-\x9f]', '', line).strip()
 
+        if clean_line == '[Core.System]':
+            section_found = True
+            j = i + 1
+            while j < len(ini_content) and not ini_content[j].lstrip().startswith('['):
+                if ini_content[j].lstrip().startswith('Paths='):
+                    paths_added.add(ini_content[j].strip())
+                j += 1
+
+            insert_at = i + 1
             for path_config in paths_config:
                 if path_config not in paths_added:
-                    ini_content.insert(i + 1, path_config + '\n')
-                    paths_added.add(path_config)
+                    ini_content.insert(insert_at, path_config + '\n')
+                    insert_at += 1
             break
 
     if not section_found:
@@ -138,10 +140,8 @@ def update_ini_file():
         for path_config in paths_config:
             ini_content.append(path_config + '\n')
 
-    with open(ini_full_path, 'w', encoding='utf-8') as ini_file:
+    with open(ini_full_path, 'w', encoding='latin-1') as ini_file:
         ini_file.writelines(ini_content)
-
-
 
 def get_subscription_ids():
     all_subscription_app_ids = []
@@ -173,7 +173,7 @@ def get_subscription_ids():
 
 def get_current_commands():
     with open(settings_path, 'r') as settings_file:
-        settings = json.load(settings_file)
+        settings = json.load(settings_file, encoding='utf-8')
 
     user = settings['login_info']['user']
     password = settings['login_info']['password']
